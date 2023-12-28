@@ -62,7 +62,7 @@ function HomeProduct() {
          <div className='row gap-3 justify-content-center mt-5'>
             {AllItems.map(({ title, price, image, id }) => {
                return (
-                  <div key={id} className='card col-lg-2 p-2'>
+                  <div key={id} className='card bg-black text-light   col-lg-2 p-2'>
                      <img
                         style={{
                            objectFit: "cover",
@@ -78,7 +78,7 @@ function HomeProduct() {
                      </div>
                      <button
                         onClick={() => HandleAddCart(AllItems, id)}
-                        className='btn btn-dark m-2 w-50 '
+                        className='btn btn-info fw-bold text-light m-2 w-50 '
                      >
                         Add to Cart
                      </button>
