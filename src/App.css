@@ -1,0 +1,38 @@
+
+.card{
+    transition: 0.5s;
+    position: relative;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+}
+img{
+    transition: 0.5s;
+}
+.card img:hover{
+    transform: scale(1.05);
+}
+
+.card:hover{
+    transform: translateY(-5px);
+}
+
+.active{
+   justify-content: center;
+   display: none;
+   
+}
+.card .btn_con{
+    position: absolute;
+    top: 30%;
+    right: 40%;
+    display: none;
+}
+.card:hover .btn_con{
+  display: flex;
+}
+#detailsCard{
+    position: absolute;
+    top: 30%;
+    left: 40%;
+}
