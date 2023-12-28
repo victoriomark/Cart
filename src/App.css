@@ -33,6 +33,6 @@ img{
 }
 #detailsCard{
     position: absolute;
-    top: 30%;
-    left: 40%;
+    top: 20%;
+    margin: 10rem;
 }

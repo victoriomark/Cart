@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import ThemeContext from "../Context/ThemeContex";
 
@@ -6,13 +6,14 @@ function HomeProduct() {
    const { HandleAddCart, HandleViewDetails } = useContext(ThemeContext);
    const [AllItems, SetAllItems] = useState([]);
    const [selectedProduct, setSelectedProduct] = useState(null); // To store the selected product
+  const [NumberOfItem,SetNumberOfItem] = useState(5)
 
    // Fetching data using useEffect
    useEffect(() => {
-      axios.get("https://fakestoreapi.com/products?limit=10").then((Data) => {
+      axios.get(`https://fakestoreapi.com/products?limit=${NumberOfItem}`).then((Data) => {
          SetAllItems(Data.data);
       });
-   }, []);
+   }, [NumberOfItem]);
 
    // Function to show product details in a modal
    const showProductDetails = (id, title, image, description,category) => {
@@ -20,11 +21,15 @@ function HomeProduct() {
       const product = AllItems.find((item) => item.id === id);
       setSelectedProduct(product);
    };
-
+  const HanldeMoreItem = () =>{
+  SetNumberOfItem(NumberOfItem + 5)
+  console.log(AllItems.length)
+  }
+ 
    // card component to display product details
    const ProductDetailsModal = ({ product }) => {
       return (
-         <div id="detailsCard" className='card col-lg-3 '>
+         <div id="detailsCard" className='card col-lg-6'>
             <img
                style={{
                   objectFit: "cover",
@@ -76,12 +81,13 @@ function HomeProduct() {
                         <h5 className='card-title'>{title}</h5>
                         <h5 className='fw-bolder text-success'>₱ {price}</h5>
                      </div>
-                     <button
+                    <button
                         onClick={() => HandleAddCart(AllItems, id)}
                         className='btn btn-info fw-bold text-light m-2 w-50 '
                      >
                         Add to Cart
                      </button>
+                 
                      <button
                         onClick={() => showProductDetails(id, title)}
                         className='btn_con btn btn-secondary'
@@ -94,6 +100,9 @@ function HomeProduct() {
          </div>
          {/* Render the modal when a product is selected */}
          {selectedProduct && <ProductDetailsModal product={selectedProduct} />}
+         <div className="container">
+            <h5 onClick={HanldeMoreItem} style={{cursor:"pointer"}} className="text-center text-light">See More Product</h5>
+         </div>
       </>
    );
 }
